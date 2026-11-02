@@ -5,6 +5,7 @@ button = machine.Pin(14, machine.Pin.IN, machine.Pin.PULL_DOWN)
 button.value(0)
 
 led_ext = machine.Pin(15, machine.Pin.OUT)
+led_onb = machine.Pin(25, machine.Pin.OUT)
 count = 0
 
 sleep_time = 0.3
@@ -20,7 +21,15 @@ def blinker(blinks):
 
 while True:
     if button.value() == 1:
-        blinker(3 + 1)
+        blinker(3)
+        led_onb.value(1)
+        utime.sleep(sleep_time)
+        led_onb.value(0)
+
+while True:
+    if button.value() == 1:
+        blinker(5)
+        led_onb.value(1)
 
 #while True:
 #    if button.value() == 1:
