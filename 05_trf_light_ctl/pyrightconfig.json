@@ -1,0 +1,6 @@
+{
+  "venvPath": "..",
+  "venv": "mpvenv",
+  "reportMissingModuleSource": "none",
+  "reportMissingImports": "warning"
+}
