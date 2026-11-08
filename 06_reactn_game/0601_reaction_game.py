@@ -15,8 +15,11 @@ def btn_handler(pin):
     btn.irq(handler=None) # turn handler off
     print(pin)            # print interupt pin status
 
+# sequence for led to turn on and off at random times
 led.value(1)
-utime.sleep(urandom.uniform(5, 10))
-led.value(0)
+utime.sleep(urandom.uniform(5, 10)) # random time between 5 and 10 seconds with uniform 
+                                    # distribution
+led.value(0) # switch led off to signal user to push button
 
+# initialize interrupt request trigger
 btn.irq(trigger=machine.Pin.IRQ_RISING, handler=btn_handler)
