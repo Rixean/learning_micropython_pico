@@ -1,6 +1,10 @@
 {
   "venvPath": "..",
   "venv": "mpvenv",
+  "stubPath": "../mpvenv/lib/python3.13/site-packages",
+  "extraPaths": [
+    "../mpvenv/lib/python3.13/site-packages",
+  ],
   "reportMissingModuleSource": "none",
   "reportMissingImports": "warning"
 }
