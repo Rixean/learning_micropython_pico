@@ -19,6 +19,9 @@ def pir_handler(pin):
     global motion_detected
     motion_detected = True
 
+# arm interupt to change motion detected variable
+pir_sensor.irq(trigger=machine.Pin.IRQ_RISING, handler=pir_handler)
+
 while not motion_detected:
     utime.sleep_ms(50)
 
