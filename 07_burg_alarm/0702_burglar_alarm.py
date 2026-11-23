@@ -12,7 +12,11 @@ import utime
 # 3.3v (high) will be sent to pin when triggered
 pir_sensor = machine.Pin(28, machine.Pin.IN, machine.Pin.PULL_DOWN)
 
+# initialize led pin and let it light for 1 second to state program start
 led = machine.Pin(15, machine.Pin.OUT)
+led.value(1)
+utime.sleep(1)
+led.value(0)
 
 # initialize global variable that indicates if motion was detected
 motion_detected = False
@@ -32,7 +36,7 @@ def announce_motion_detection():
     # blink led and set status
     global led_blinking
     led_blinking = True
-    for i in range(50):
+    for i in range(30):
         led.toggle()
         utime.sleep_ms(100)
     led_blinking = False
