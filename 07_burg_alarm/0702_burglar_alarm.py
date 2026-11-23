@@ -27,7 +27,7 @@ def pir_handler(pin):
     global motion_detected
     motion_detected = True
 
-# arm interupt to change motion detected variable
+# set interupt to pause main execution and change motion detected variable
 pir_sensor.irq(trigger=machine.Pin.IRQ_RISING, handler=pir_handler)
 
 def announce_motion_detection():
@@ -62,4 +62,6 @@ while True:
 # HC-SR501 PIR sensor (passive infrared sensor )
 # integrated in own circuit board containing the sensor, resistors, potentiometers
 # potentiometers for sensitivity and activity period
+
+# second thread would be used if code needs to keep running continously without pause
 ##############################################################################################
