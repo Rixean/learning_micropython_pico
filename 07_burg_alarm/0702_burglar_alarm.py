@@ -12,8 +12,11 @@ import utime
 # 3.3v (high) will be sent to pin when triggered
 pir_sensor = machine.Pin(28, machine.Pin.IN, machine.Pin.PULL_DOWN)
 
+led = machine.Pin(15, machine.Pin.OUT)
+
 # initialize global variable that indicates if motion was detected
 motion_detected = False
+led_blinking = False
 
 # handler will be called using interrupt so minimal changes in preallocated memory
 def pir_handler(pin):
@@ -26,11 +29,25 @@ pir_sensor.irq(trigger=machine.Pin.IRQ_RISING, handler=pir_handler)
 def announce_motion_detection():
     print("ALARM! Motion detected!")
 
+    # blink led and set status
+    global led_blinking
+    led_blinking = True
+    for i in range(50):
+        led.toggle()
+        utime.sleep_ms(100)
+    led_blinking = False
 
+    global motion_detected
+    motion_detected = False
+
+# infinite loop that keeps the program running
 while True:
     if motion_detected:
-        announce_motion_detection()
-        motion_detected = False
+        if not led_blinking:
+            print("LED is off -> announce motion")
+            announce_motion_detection()
+        else:
+            print("LED is On -> no announcement.")
 
     utime.sleep_ms(50)
 
